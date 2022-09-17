@@ -51,7 +51,10 @@ public class Controlador {
 	public ResponseEntity<?> actualizarTercero(@RequestBody Tercero tercero, @PathVariable Integer id){
 		try {
 			Tercero terceroExistente = servicios.obtenerTerceroPorId(id);
-			servicios.guardarTercero(tercero);
+			terceroExistente.setNombre(tercero.getNombre());
+			terceroExistente.setCosto(tercero.getCosto());
+			terceroExistente.setEdad(tercero.getEdad());
+			servicios.guardarTercero(terceroExistente);
 			return new ResponseEntity<Tercero>(HttpStatus.OK);
 		} catch (Exception exception) {
 			return new ResponseEntity<Tercero>(HttpStatus.NOT_FOUND);
